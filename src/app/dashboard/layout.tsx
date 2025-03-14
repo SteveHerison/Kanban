@@ -18,35 +18,33 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   function handleOpen() {
     setShowOpen(!showOpen);
   }
+
   return (
-    <div className="w-full h-screen grid grid-rows-[80px_auto]">
+    <div className="w-full h-screen grid grid-rows-[80px_auto] overflow-hidden">
+      {" "}
+      {/* Impede scroll na página toda */}
       <div className="w-full h-full border-b border-muted">
         <Header />
       </div>
-      <div className="w-full h-full grid  lg:grid-cols-[300px_auto] md:grid-cols-[210px_auto] grid-cols-1 relative">
+      <div className="w-full h-full grid lg:grid-cols-[300px_auto] md:grid-cols-[210px_auto] grid-cols-1 relative overflow-hidden">
         {/* Overlay */}
         {showOpen && (
           <div
             className="absolute w-full h-full md:hidden inset-0 bg-black/50 backdrop-blur-xs z-40"
-            onClick={handleOpen} // Fechar ao clicar fora
+            onClick={handleOpen}
           ></div>
         )}
-
         {/* Sidebar */}
         {showOpen ? (
           <aside
             className={cn(
-              "h-full flex flex-col border-e border-muted  transition-all",
-              showOpen ? "absolute z-50  md:relative " : " md:flex",
+              "h-full flex flex-col border-e border-muted transition-all",
+              showOpen ? "absolute z-50 md:relative" : "md:flex",
               theme === "dark"
                 ? "bg-zinc-800 md:bg-accent"
                 : "bg-white md:bg-accent"
             )}
           >
-            <div
-              className={cn(showOpen ? "absolute  w-full h-full -z-50" : "")}
-            ></div>
-
             <div className="w-full p-6 ">
               <h2>logo</h2>
             </div>
@@ -69,7 +67,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </aside>
         ) : (
           <div
-            className={cn(" bottom-[90px]", showOpen ? "hidden" : "absolute")}
+            className={cn(
+              "bottom-[90px]",
+              showOpen ? "hidden" : "absolute z-20"
+            )}
           >
             <Button
               onClick={handleOpen}
@@ -79,9 +80,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </Button>
           </div>
         )}
-
         {/* Conteúdo Principal */}
-        <main className="p-2">{children}</main>
+        <main
+          className={cn(
+            "p-4 w-full min-w-0 overflow-x-hidden",
+            !showOpen && "w-screen"
+          )}
+        >
+          {children}
+        </main>{" "}
+        {/* 🔥 min-w-0 impede expansão */}
       </div>
     </div>
   );
