@@ -9,11 +9,11 @@ export default function Home() {
                 <span className="w-4 h-4 bg-amber-200 rounded-full"></span>
                 <span>TODO()</span>
               </div>
-              <div className="grid grid-rows-8 h-full gap-3  overflow-x-auto">
+              <div className="grid grid-rows-6 h-full gap-3  overflow-x-auto">
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
-                    className="p-1 flex flex-col h-full gap-4 truncate shadow-2xl bg-zinc-800 rounded-lg"
+                    className="p-1 flex flex-col h-full gap-4 truncate shadow-2xl bg-zinc-800 rounded-lg "
                   >
                     <span className="truncate">
                       title dfdsafasdfasdfasdfasdfdsdfdfasffasdfasdsafsad
